@@ -1,0 +1,79 @@
+# ============================================================================
+# SECRETS
+# ============================================================================
+
+# Directories
+# (none - secrets are typically files)
+
+# Files
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+src/credentials.h
+include/secret.h
+include/credentials.h
+
+# ============================================================================
+# PLATFORMIO
+# ============================================================================
+
+# Directories
+.pio/
+.pioenvs/
+.piolibdeps/
+build/
+lib_deps/
+.piocache/
+.pio_cache/
+pio_cache/
+
+# Files
+src/secret.h
+*.bin
+*.elf
+*.map
+*.hex
+*.eep
+*.lss
+*.sym
+*.a
+*.so
+*.dylib
+*.dll
+
+# ============================================================================
+# EDITORS
+# ============================================================================
+
+# Directories
+.vscode/
+.idea/
+
+# Files
+*.iml
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# ============================================================================
+# OS
+# ============================================================================
+
+# Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.#*
+*.tmp
+*.temp
+*.bak
+*.backup
+*.log
