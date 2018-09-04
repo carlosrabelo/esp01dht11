@@ -1,7 +1,39 @@
+#include <ESP8266WiFi.h>
+#include <ESP8266WiFiMulti.h>
+
 #include "dht11.h"
+#include "secret.h"
 
 #define DHT_PIN 2
 #define READING_INTERVAL 60000
+#define WIFI_TIMEOUT_MS 30000
+
+static ESP8266WiFiMulti wifiMulti;
+
+static void connectToWiFi() {
+    Serial.println("Connecting to WiFi...");
+    Serial.print("SSID: ");
+    Serial.println(ssid);
+
+    wifiMulti.addAP(ssid, password);
+
+    unsigned long startAttempt = millis();
+    while (wifiMulti.run(WL_CONNECTED) != WL_CONNECTED) {
+        if (millis() - startAttempt > WIFI_TIMEOUT_MS) {
+            Serial.println("WiFi connection timeout!");
+            return;
+        }
+        Serial.print(".");
+        delay(500);
+    }
+
+    Serial.println();
+    Serial.print("WiFi connected! IP: ");
+    Serial.println(WiFi.localIP());
+    Serial.print("Signal strength: ");
+    Serial.print(WiFi.RSSI());
+    Serial.println(" dBm");
+}
 
 static void printSystemInfo() {
     Serial.print("Free heap: ");
@@ -19,6 +51,8 @@ void setup() {
     Serial.println();
     Serial.println("=== ESP01 DHT11 Monitor ===");
     printSystemInfo();
+
+    connectToWiFi();
 }
 
 void loop() {
