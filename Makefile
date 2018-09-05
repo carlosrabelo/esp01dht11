@@ -9,7 +9,7 @@ MONITOR_PORT     ?= /dev/ttyUSB0
 MONITOR_SPEED    ?= 115200
 UPLOAD_SPEED     ?= 115200
 
-.PHONY: build check check-pio clean deps erase flash help install-pio monitor test upload
+.PHONY: build check check-pio clean deps detect-port erase flash help install-pio monitor test upload
 
 build: check-pio ## Compile firmware
 	./.make/run-pio.sh run
@@ -40,6 +40,9 @@ test: check-pio ## Run unit tests
 
 erase: check-pio ## Erase device flash memory
 	./.make/run-pio.sh run --target erase
+
+detect-port: ## Auto-detect board USB port and save to .env
+	@./.make/detect_board.sh
 
 install-pio: ## Install PlatformIO
 	@./.make/install-pio.sh
