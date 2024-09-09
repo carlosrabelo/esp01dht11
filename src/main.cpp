@@ -73,6 +73,6 @@ void loop()
             }
         }
 
-        delay(30000);
+        delay(60000);
     }
 }
